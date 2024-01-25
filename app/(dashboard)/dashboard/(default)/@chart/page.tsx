@@ -1,7 +1,7 @@
-export const DashboardOrderModule = () => {
+export default function DashboardChart() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <span>Waduh</span>
     </main>
   );
-};
+}
