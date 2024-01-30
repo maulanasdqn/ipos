@@ -1,7 +1,7 @@
 export const DashboardModule = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span>Waduh</span>
+    <main className="flex flex-col">
+      <span>And this is a dashboard module</span>
     </main>
   );
 };

@@ -1,7 +1,5 @@
+import { DashboardCreateOrderModule } from "../../_modules/create";
+
 export default function DashboardCreateOrderPage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span>Waduh</span>
-    </main>
-  );
+  return <DashboardCreateOrderModule />;
 }
