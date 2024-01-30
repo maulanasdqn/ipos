@@ -24,6 +24,41 @@ const formLogin = z.object({
 });
 
 export function AuthLoginModule() {
+  return (
+    <section className="flex flex-col bg-primary h-screen items-center justify-center">
+      <h1 className="text-3xl font-bold text-primary-foreground mb-4">
+        iPOS UMKM
+      </h1>
+      <div className="flex flex-col gap-y-4 items-center w-1/4 p-4">
+        <Button
+          onClick={async () => await AuthLoginGoogle()}
+          className="cursor-pointer w-full"
+          variant="secondary"
+          type="submit"
+        >
+          <div className="flex gap-x-3 items-center">
+            Masuk Dengan Google
+            <IconGoogle />
+          </div>
+        </Button>
+
+        <Button
+          onClick={async () => await AuthLoginGithub()}
+          className="cursor-pointer w-full"
+          variant="secondary"
+          type="submit"
+        >
+          <div className="flex gap-x-3 items-center">
+            Masuk Dengan Github
+            <IconGithub />
+          </div>
+        </Button>
+      </div>
+    </section>
+  );
+}
+
+export function AuthLoginAdminModule() {
   const form = useForm<z.infer<typeof formLogin>>({
     resolver: zodResolver(formLogin),
     mode: "all",
@@ -35,8 +70,8 @@ export function AuthLoginModule() {
 
   return (
     <section className="flex flex-col bg-primary h-screen items-center justify-center">
-      <h1 className="text-3xl font-bold text-primary-foreground mb-10">
-        Selemat Datang, Silahkan masuk
+      <h1 className="text-3xl font-bold text-primary-foreground mb-4">
+        iPOS UMKM Admin
       </h1>
       <div className="flex flex-col gap-y-4 items-center w-1/4 p-4">
         <Form {...form}>
@@ -82,30 +117,6 @@ export function AuthLoginModule() {
             </Button>
           </form>
         </Form>
-
-        <Button
-          onClick={async () => await AuthLoginGoogle()}
-          className="cursor-pointer w-full"
-          variant="secondary"
-          type="submit"
-        >
-          <div className="flex gap-x-3 items-center">
-            Masuk Dengan Google
-            <IconGoogle />
-          </div>
-        </Button>
-
-        <Button
-          onClick={async () => await AuthLoginGithub()}
-          className="cursor-pointer w-full"
-          variant="secondary"
-          type="submit"
-        >
-          <div className="flex gap-x-3 items-center">
-            Masuk Dengan Github
-            <IconGithub />
-          </div>
-        </Button>
       </div>
     </section>
   );

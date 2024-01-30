@@ -4,16 +4,22 @@ import { usePathname } from "next/navigation";
 import { clsx } from "clsx";
 import { IoMdDesktop, IoMdLogOut } from "react-icons/io";
 import { AiFillCaretDown } from "react-icons/ai";
-import { FaUserClock } from "react-icons/fa";
 import { PiUsersThreeFill } from "react-icons/pi";
 import Link from "next/link";
 import { useQueryState } from "next-usequerystate";
 import { TUser } from "@/entities";
-import { FaUsersCog, FaUserEdit } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
 import { Typography } from "./typography";
 import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 import { hasCommonElements } from "@/lib/utils";
 import { AuthLogout } from "@/app/(auth)/auth/(login)/_actions";
+import {
+  AiOutlineBarChart,
+  AiFillFileText,
+  AiFillShopping,
+  AiFillFund,
+} from "react-icons/ai";
+import { HiOutlineCog } from "react-icons/hi";
 
 export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useQueryState("isSidebarOpen");
@@ -25,9 +31,10 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
 
   const selectedMenu = (url: string) =>
     clsx(
-      "flex cursor-pointer items-center font-normal p-1 text-primary-foreground bg-primary rounded-lg group hover:text-primary hover:shadow-md hover:bg-gray-200",
+      "flex cursor-pointer items-center font-normal p-1  rounded-lg group hover:text-primary hover:shadow-md hover:bg-gray-200",
       {
-        "bg-white shadow-md font-[600]": pathname === url,
+        "bg-gray-200": pathname === url,
+        "bg-primary text-primary-foreground": pathname !== url,
       },
     );
 
@@ -42,50 +49,92 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
       "flex-shrink-0  w-auto h-auto transition duration-75 group-hover:text-primary-foreground group-hover:bg-primary group-hover:p-2 group-hover:rounded-lg hover:text-white",
       {
         "text-primary bg-white shadow-sm p-2 rounded-lg": pathname !== url,
-
-        "text-white bg-green-500 p-2 rounded-lg": pathname === url,
+        "text-primary-foreground bg-primary p-2 rounded-lg": pathname === url,
       },
     );
 
   const sidebarData = [
     {
-      name: "Kelola Dosen",
-      icon: <FaUserEdit className={iconClassName("/dashboard/guest")} />,
-      path: "guest",
+      name: "Sales",
+      icon: <AiOutlineBarChart className={iconClassName("/dashboard/sales")} />,
+      path: "sales",
       permissions: ["Read Dosen"],
       children: [
         {
-          name: "Data Dosen",
-          icon: <FaUserClock className={iconClassName("/dashboard/guest")} />,
-          path: "/dashboard/dosen",
-          url: `/dashboard/dosen`,
+          name: "Data Pelanggan",
+          icon: (
+            <PiUsersThreeFill
+              className={iconClassName("/dashboard/sales/customers")}
+            />
+          ),
+          path: "/dashboard/sales/customers",
+          url: `/dashboard/sales/customers`,
           permissions: ["Read Dosen"],
         },
+
         {
-          name: "Hasil Evaluasi",
+          name: "Data Product",
           icon: (
-            <PiUsersThreeFill className={iconClassName("/dashboard/user")} />
+            <AiFillShopping
+              className={iconClassName("/dashboard/sales/products")}
+            />
           ),
-          path: "/dashboard/result",
-          url: `/dashboard/result`,
+          path: "/dashboard/sales/products",
+          url: `/dashboard/sales/products`,
+          permissions: ["Read Dosen"],
+        },
+
+        {
+          name: "Data Kategori Product",
+          icon: (
+            <BiSolidCategory
+              className={iconClassName("/dashboard/sales/product-categories")}
+            />
+          ),
+          path: "/dashboard/sales/product-categories",
+          url: `/dashboard/sales/product-categories`,
+          permissions: ["Read Dosen"],
+        },
+
+        {
+          name: "Data Pesanan",
+          icon: (
+            <AiFillFund className={iconClassName("/dashboard/sales/orders")} />
+          ),
+          path: "/dashboard/sales/orders",
+          url: `/dashboard/sales/orders`,
+          permissions: ["Read Dosen"],
+        },
+
+        {
+          name: "Riwayat Penjualan",
+          icon: (
+            <AiFillFileText
+              className={iconClassName("/dashboard/sales/histories")}
+            />
+          ),
+          path: "/dashboard/sales/histories",
+          url: `/dashboard/sales/histories`,
           permissions: ["Read Dosen"],
         },
       ],
     },
 
     {
-      name: "Kelola Pertanyaan",
-      icon: <FaUsersCog className={iconClassName("/dashboard/user")} />,
-      path: "role",
+      name: "Services",
+      icon: <HiOutlineCog className={iconClassName("/dashboard/services")} />,
+      path: "services",
       permissions: ["Read Dosen"],
       children: [
         {
-          name: "Data Pertanyaan",
+          name: "Data Service",
           icon: (
-            <PiUsersThreeFill className={iconClassName("/dashboard/user")} />
+            <PiUsersThreeFill
+              className={iconClassName("/dashboard/services")}
+            />
           ),
-          path: "/dashboard/question",
-          url: `/dashboard/question`,
+          path: "/dashboard/services",
+          url: `/dashboard/services`,
           permissions: ["Read Dosen"],
         },
       ],
@@ -103,7 +152,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           <div className="flex flex-col gap-y-4">
             <div className="flex gap-x-3 items-start justify-start">
               <span className="text-primary-foreground text-left font-bold w-full block text-2xl">
-                Example Sidebar
+                PSU Service
               </span>
             </div>
 
@@ -121,7 +170,6 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
                 </Typography>
               </div>
             </div>
-
             <hr className="text-grey-300 mb-4" />
           </div>
           <ul className="space-y-2 font-medium">
@@ -132,7 +180,9 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
                   className={selectedMenu("/dashboard")}
                 >
                   <IoMdDesktop className={iconClassName("/dashboard")} />
-                  <Typography color="ms-3">Beranda</Typography>
+                  <Typography size="body-2" color="ms-3">
+                    Dashboard
+                  </Typography>
                 </Link>
               </li>
             )}
@@ -146,14 +196,18 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
                     <div
                       onClick={() =>
                         open === "" || open !== item.path
-                          ? setOpen(item.path)
+                          ? setOpen(
+                              item.path || pathname === item.path
+                                ? ""
+                                : item.path,
+                            )
                           : setOpen("")
                       }
                       className={selectedMenu("") + " justify-between"}
                     >
                       <div className="flex gap-x-3 items-center group">
                         {item.icon}
-                        {item.name}
+                        <Typography size="body-2">{item.name}</Typography>
                       </div>
                       <AiFillCaretDown
                         className={clsx(
@@ -179,9 +233,9 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
                                 className={selectedMenu(child.path)}
                               >
                                 {child.icon}
-                                <span className="flex-1 ms-3">
+                                <Typography color="ms-2" size="body-2">
                                   {child.name}
-                                </span>
+                                </Typography>
                               </Link>
                             )}
                           </Fragment>
@@ -200,7 +254,9 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
             className={selectedMenu("")}
           >
             <IoMdLogOut className={iconClassName("")} />
-            <Typography color="ms-3">Logout</Typography>
+            <Typography color="ms-3" size="body-2">
+              Logout
+            </Typography>
           </div>
         </li>
       </div>

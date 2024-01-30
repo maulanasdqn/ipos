@@ -16,7 +16,7 @@ export const {
         token.email = profile?.email;
         token.role = {
           name: "Google User",
-          permissions: ["Read Dosen"],
+          permissions: ["Read Dosen", "Dashboard"],
         };
       }
 
@@ -26,7 +26,7 @@ export const {
         token.email = profile?.email;
         token.role = {
           name: "Github User",
-          permissions: ["Read Dosen"],
+          permissions: ["Read Dosen", "Dashboard"],
         };
       }
       return token;

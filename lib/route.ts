@@ -12,6 +12,7 @@ export const publicRoutes: string[] = ["/"];
  */
 export const authRoutes: string[] = [
   "/auth/login",
+  "/auth/login/admin",
   "/auth/verify",
   "/auth/success",
 ];
