@@ -32,6 +32,7 @@ export const {
       return token;
     },
 
+    //@ts-ignore
     session({ session, token }) {
       session.user = token;
       return session;
