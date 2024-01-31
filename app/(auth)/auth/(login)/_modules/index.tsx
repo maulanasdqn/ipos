@@ -27,7 +27,7 @@ export function AuthLoginModule() {
   return (
     <section className="flex flex-col bg-primary h-screen items-center justify-center">
       <h1 className="text-3xl font-bold text-primary-foreground mb-4">
-        iPOS UMKM
+        PSU Service Login
       </h1>
       <div className="flex flex-col gap-y-4 items-center w-1/4 p-4">
         <Button
@@ -71,7 +71,7 @@ export function AuthLoginAdminModule() {
   return (
     <section className="flex flex-col bg-primary h-screen items-center justify-center">
       <h1 className="text-3xl font-bold text-primary-foreground mb-4">
-        iPOS UMKM Admin
+        PSU Service Admin
       </h1>
       <div className="flex flex-col gap-y-4 items-center w-1/4 p-4">
         <Form {...form}>
@@ -113,7 +113,7 @@ export function AuthLoginAdminModule() {
               variant="secondary"
               type="submit"
             >
-              Masuk sekarang
+              Masuk
             </Button>
           </form>
         </Form>

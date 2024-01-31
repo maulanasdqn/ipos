@@ -23,11 +23,21 @@ import { HiOutlineCog } from "react-icons/hi";
 
 export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
   const [isSidebarOpen, setIsSidebarOpen] = useQueryState("isSidebarOpen");
-  const [open, setOpen] = useState("");
+  const pathname = usePathname();
+  const [open, setOpen] = useState(pathname);
   const userName = useMemo(() => user?.fullname, [user]);
   const roleName = useMemo(() => user?.role?.name, [user]);
   const userImage = useMemo(() => user?.image, [user]);
-  const pathname = usePathname();
+
+  console.log(
+    "Isinya apa tuh kira kira OPEN STATE",
+    open.split("/").slice(0, -1).join("/"),
+  );
+
+  console.log(
+    "Isinya apa tuh kira kira PATHNAME",
+    pathname.split("/").slice(0, -1).join("/"),
+  );
 
   const selectedMenu = (url: string) =>
     clsx(
@@ -193,31 +203,39 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
                   user?.role?.permissions,
                 ) && (
                   <li key={index}>
-                    <div
-                      onClick={() =>
-                        open === "" || open !== item.path
-                          ? setOpen(
-                              item.path || pathname === item.path
-                                ? ""
-                                : item.path,
-                            )
-                          : setOpen("")
-                      }
-                      className={selectedMenu("") + " justify-between"}
-                    >
-                      <div className="flex gap-x-3 items-center group">
-                        {item.icon}
-                        <Typography size="body-2">{item.name}</Typography>
+                    {item.children ? (
+                      <div
+                        onClick={() =>
+                          open === "" || open !== item.path
+                            ? setOpen(item.path)
+                            : setOpen("")
+                        }
+                        className={selectedMenu("") + " justify-between"}
+                      >
+                        <div className="flex gap-x-3 items-center group">
+                          {item.icon}
+                          <Typography size="body-2">{item.name}</Typography>
+                        </div>
+                        <AiFillCaretDown
+                          className={clsx(
+                            "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-primary",
+                            {
+                              "rotate-180": open === item.path,
+                            },
+                          )}
+                        />
                       </div>
-                      <AiFillCaretDown
-                        className={clsx(
-                          "flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75  group-hover:text-primary",
-                          {
-                            "rotate-180": open === item.path,
-                          },
-                        )}
-                      />
-                    </div>
+                    ) : (
+                      <Link
+                        className={selectedMenu(item.path)}
+                        href={item.path}
+                      >
+                        <div className="flex gap-x-3 items-center group">
+                          {item.icon}
+                          <Typography size="body-2">{item.name}</Typography>
+                        </div>
+                      </Link>
+                    )}
                     <div className="my-3" />
                     {open === item.path && (
                       <div className="flex flex-col gap-y-2 p-2 bg-primary ml-2 rounded-lg">

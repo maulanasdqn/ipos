@@ -5,8 +5,8 @@ import "./globals.css";
 const monsserat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "iPOS",
-  description: "an POS system with most advance feature",
+  title: "PSU Service",
+  description: "PSU Service",
 };
 
 export default function RootLayout({
