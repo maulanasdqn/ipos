@@ -16,7 +16,12 @@ export const {
         token.email = profile?.email;
         token.role = {
           name: "Google User",
-          permissions: ["Read Dosen", "Dashboard"],
+          permissions: [
+            "Read Sales",
+            "Read Order",
+            "Read Customer",
+            "Dashboard",
+          ],
         };
       }
 
@@ -27,6 +32,16 @@ export const {
         token.role = {
           name: "Github User",
           permissions: ["Read Dosen", "Dashboard"],
+        };
+      }
+
+      if (account?.provider === "credentials" && profile) {
+        token.fullname = profile?.fullname;
+        token.image = profile?.image;
+        token.email = profile?.email;
+        token.role = {
+          name: "Credentials User",
+          permissions: ["Dashboard"],
         };
       }
       return token;

@@ -4,7 +4,6 @@ import { Suspense } from "react";
 
 export default async function DashboardSidebarDefaultPage() {
   const session = await auth();
-  console.log("Data from sesseion SSR", session);
   return (
     <Suspense fallback={"Loading..."}>
       <Sidebar user={session?.user!} />

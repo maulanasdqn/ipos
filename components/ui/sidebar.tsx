@@ -29,19 +29,10 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
   const roleName = useMemo(() => user?.role?.name, [user]);
   const userImage = useMemo(() => user?.image, [user]);
 
-  console.log(
-    "Isinya apa tuh kira kira OPEN STATE",
-    open.split("/").slice(0, -1).join("/"),
-  );
-
-  console.log(
-    "Isinya apa tuh kira kira PATHNAME",
-    pathname.split("/").slice(0, -1).join("/"),
-  );
-
   const selectedMenu = (url: string) =>
     clsx(
-      "flex cursor-pointer items-center font-normal p-1  rounded-lg group hover:text-primary hover:shadow-md hover:bg-gray-200",
+      "flex cursor-pointer items-center font-normal p-1",
+      "rounded-lg group hover:text-primary hover:shadow-md hover:bg-gray-200",
       {
         "bg-gray-200": pathname === url,
         "bg-primary text-primary-foreground": pathname !== url,
@@ -56,7 +47,9 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
 
   const iconClassName = (url: string) =>
     clsx(
-      "flex-shrink-0  w-auto h-auto transition duration-75 group-hover:text-primary-foreground group-hover:bg-primary group-hover:p-2 group-hover:rounded-lg hover:text-white",
+      "flex-shrink-0  w-auto h-auto transition duration-75",
+      "group-hover:text-primary-foreground group-hover:bg-primary",
+      "group-hover:p-2 group-hover:rounded-lg hover:text-white",
       {
         "text-primary bg-white shadow-sm p-2 rounded-lg": pathname !== url,
         "text-primary-foreground bg-primary p-2 rounded-lg": pathname === url,
@@ -68,7 +61,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
       name: "Sales",
       icon: <AiOutlineBarChart className={iconClassName("/dashboard/sales")} />,
       path: "sales",
-      permissions: ["Read Dosen"],
+      permissions: ["Read Sales"],
       children: [
         {
           name: "Data Pelanggan",
@@ -79,7 +72,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           ),
           path: "/dashboard/sales/customers",
           url: `/dashboard/sales/customers`,
-          permissions: ["Read Dosen"],
+          permissions: ["Read Customer"],
         },
 
         {
@@ -91,7 +84,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           ),
           path: "/dashboard/sales/products",
           url: `/dashboard/sales/products`,
-          permissions: ["Read Dosen"],
+          permissions: ["Read Product"],
         },
 
         {
@@ -103,7 +96,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           ),
           path: "/dashboard/sales/product-categories",
           url: `/dashboard/sales/product-categories`,
-          permissions: ["Read Dosen"],
+          permissions: ["Read Product Category"],
         },
 
         {
@@ -113,7 +106,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           ),
           path: "/dashboard/sales/orders",
           url: `/dashboard/sales/orders`,
-          permissions: ["Read Dosen"],
+          permissions: ["Read Order"],
         },
 
         {
@@ -125,7 +118,7 @@ export const Sidebar: FC<{ user: TUser }> = ({ user }): ReactElement => {
           ),
           path: "/dashboard/sales/histories",
           url: `/dashboard/sales/histories`,
-          permissions: ["Read Dosen"],
+          permissions: ["Read Order History"],
         },
       ],
     },
