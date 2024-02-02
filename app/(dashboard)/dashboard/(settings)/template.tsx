@@ -1,9 +1,9 @@
 import { FC, PropsWithChildren, ReactElement } from "react";
 
-const DashboardTemplate: FC<PropsWithChildren> = ({
+const DashboardSettingTemplate: FC<PropsWithChildren> = ({
   children,
 }): ReactElement => {
   return <section className="flex flex-col">{children}</section>;
 };
 
-export default DashboardTemplate;
+export default DashboardSettingTemplate;

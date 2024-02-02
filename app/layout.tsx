@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import { QueryProvider } from "@/lib/query";
 
 const monsserat = Montserrat({ subsets: ["latin"] });
 
@@ -16,7 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={monsserat.className}>{children}</body>
+      <body className={monsserat.className}>
+        <QueryProvider>{children}</QueryProvider>
+      </body>
     </html>
   );
 }

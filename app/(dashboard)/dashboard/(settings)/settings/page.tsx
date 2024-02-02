@@ -1,7 +1,9 @@
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <span>Waduh</span>
-    </main>
-  );
-}
+import { NextPage } from "next";
+import { DashboardSettingModule } from "../_modules";
+import { ReactElement } from "react";
+
+const DashboardSettingPage: NextPage = (): ReactElement => {
+  return <DashboardSettingModule />;
+};
+
+export default DashboardSettingPage;
